@@ -1,0 +1,32 @@
+                OUTPUT 2500AD
+.ORG 2000H
+DATA SEGMENT
+STRING1 DB "HELLO WORLD$"
+VOWELS DB "AEIOUaeiou"
+RESULT DB 00H
+DATA ENDS
+
+CODE SEGMENT
+        ASSUME CS:CODE,DS:DATA ,ES:DATA
+START:
+        MOV AX,DATA
+        MOV DS,AX
+        MOV ES,AX
+        LEA SI,STRING1
+        MOV BL,00H
+NEXT_CHAR:
+        LODSB
+        CMP AL,'$'
+        JZ  DONE
+        LEA DI,VOWELS
+        MOV CX,000AH
+        CLD
+        REPNE SCASB
+        JNZ NEXT_CHAR
+        INC BL
+        JMP NEXT_CHAR
+DONE:
+        MOV RESULT,BL
+        HLT
+CODE ENDS
+ENDS
