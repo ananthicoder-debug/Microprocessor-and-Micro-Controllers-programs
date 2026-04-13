@@ -1,0 +1,27 @@
+//sum of n
+
+                OUTPUT 2500AD
+.ORG 2000H
+DATA SEGMENT
+NUM DB 01H,02H,03H,04H,05H,06H,07H,08H,09H,0AH
+SUM DW 0000H
+DATA ENDS
+
+CODE SEGMENT
+        ASSUME CS:CODE,DS:DATA
+        MOV AX,DATA
+        MOV DS,AX
+        MOV SI,OFFSET NUM
+        MOV CL,0AH
+        MOV AL,00H
+        MOV AH,00H
+L1: ADD AL,[SI]
+        JNC L2
+        INC AH
+L2: INC SI
+        DEC CL
+        JNZ L1
+        MOV SUM,AX
+        HLT
+CODE ENDS
+END
