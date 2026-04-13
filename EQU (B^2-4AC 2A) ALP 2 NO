@@ -1,0 +1,39 @@
+//EQU(b^2-4ac/2a)
+        OUTPUT 2500AD
+.ORG 2000H
+DATA SEGMENT
+A DB 01H
+B DB 04H
+C DB 02H
+ANS1 DW 0000H
+ANS2 DW 0000H
+NUM DW 0000H
+DEN DW 0000H
+RES DW 0000H
+DATA ENDS
+CODE SEGMENT
+        ASSUME CS:CODE,DS:DATA
+        MOV AX,DATA
+        MOV DS,AX
+        MOV AL,B
+        MUL AL
+        MOV ANS1,AX
+        MOV AL,A
+        MOV BL,C
+        MUL BL
+        MOV ANS2,AX
+        MOV AX,ANS2
+        MOV BX,0004H
+        MUL BX
+        SUB ANS1,AX
+        MOV AL,A
+        MOV BL,02H
+        MUL BL
+        MOV DEN,AX
+        MOV DX,0000H
+        MOV AX,ANS1
+        MOV BX,DEN
+        DIV BX
+        MOV RES,AX
+CODE ENDS
+END
